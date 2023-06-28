@@ -1,0 +1,53 @@
+﻿<Window x:Class="new_demo.CreateClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:new_demo"
+        mc:Ignorable="d"
+        Title="CreateClient" Height="348" Width="551">
+    <Grid>
+        <StackPanel Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <TextBlock Text="Client code:"/>
+                <TextBox x:Name="clientCodeTB" Margin="10 0" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <TextBlock Text="FIO:"/>
+                <TextBox x:Name="fioTB" Margin="10 0" Width="300"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5">
+                <TextBlock Text="E-mail:"/>
+                <TextBox x:Name="emailTB" Margin="10 0" Width="150"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 5" >
+                <TextBlock Text="Birthday:"/>
+                <DatePicker Name="birthdayTB" Margin="10 0"/>
+            </StackPanel>
+            <TextBlock Text="Adress:"/>
+            <StackPanel Orientation="Horizontal" Margin="20 5 0 5">
+                <TextBlock Text="Index:"/>
+                <TextBox x:Name="indexTB" Margin="10 0" Width="100"/>
+                <TextBlock Text="City:"/>
+                <TextBox x:Name="cityTB" Margin="10 0" Width="100"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20 5 0 5">
+                <TextBlock Text="Street:"/>
+                <TextBox x:Name="streetTB" Margin="10 0" Width="100"/>
+                <TextBlock Text="House:"/>
+                <TextBox x:Name="houseTB" Margin="10 0" Width="100"/>
+                <TextBlock Text="Apartment:"/>
+                <TextBox x:Name="apartmentTB" Margin="10 0" Width="100"/>
+            </StackPanel>
+            <TextBlock Text="Passport:"/>
+            <StackPanel Orientation="Horizontal" Margin="20 5 0 5">
+                <TextBlock Text="Seria:"/>
+                <TextBox x:Name="seriaTB" Margin="10 0" Width="100"/>
+                <TextBlock Text="Nomer:"/>
+                <TextBox x:Name="nomerTB" Margin="10 0" Width="100"/>
+            </StackPanel>
+            <Button Content="Create client" Margin="0 5" Click="Button_Click"/>
+            <Button  Content="Cancel" Margin="0 0 0 0" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

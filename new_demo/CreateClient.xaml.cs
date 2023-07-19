@@ -24,7 +24,7 @@ namespace new_demo
         {
             InitializeComponent();
             int lastClientNum;
-            using (demo7Entities entities = new demo7Entities())
+            using (demoEntities entities = new demoEntities())
             {
                 var clients = entities.Clients.ToList();
                 lastClient = clients[clients.Count - 1];
@@ -54,7 +54,7 @@ namespace new_demo
             client.FIO = fio;
             client.Email = email;
             client.Password = password; 
-            client.Adress= adress;
+            client.Address= adress;
             client.Birthday = (DateTime)birthday;
             client.Passport= passport;
         }

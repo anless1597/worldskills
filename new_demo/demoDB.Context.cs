@@ -13,10 +13,10 @@ namespace new_demo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class demo7Entities : DbContext
+    public partial class demoEntities : DbContext
     {
-        public demo7Entities()
-            : base("name=demo7Entities")
+        public demoEntities()
+            : base("name=demoEntities")
         {
         }
     

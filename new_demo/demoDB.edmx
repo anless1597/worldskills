@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище demo7Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище demoModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientCode" />
@@ -13,7 +13,7 @@
           <Property Name="ClientCode" Type="int" Nullable="false" />
           <Property Name="Passport" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
-          <Property Name="Adress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -68,9 +68,9 @@
         </EntityType>
         <EntityType Name="StaffPositions">
           <Key>
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="PositionName" />
           </Key>
-          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -135,14 +135,14 @@
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StaffPositions">
-              <PropertyRef Name="Name" />
+              <PropertyRef Name="PositionName" />
             </Principal>
             <Dependent Role="Staff">
               <PropertyRef Name="Position" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище demo7ModelContainer">
+        <EntityContainer Name="Хранилище demoModelContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderServices" EntityType="Self.OrderServices" Schema="dbo" store:Type="Tables" />
@@ -176,7 +176,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="demo7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="demoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Clients">
           <Key>
             <PropertyRef Name="ClientCode" />
@@ -185,7 +185,7 @@
           <Property Name="ClientCode" Type="Int32" Nullable="false" />
           <Property Name="Passport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Clients" FromRole="Clients" ToRole="Orders" />
@@ -239,9 +239,9 @@
         </EntityType>
         <EntityType Name="StaffPositions">
           <Key>
-            <PropertyRef Name="Name" />
+            <PropertyRef Name="PositionName" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_StaffPositions" FromRole="StaffPositions" ToRole="Staff" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -283,7 +283,7 @@
           <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StaffPositions">
-              <PropertyRef Name="Name" />
+              <PropertyRef Name="PositionName" />
             </Principal>
             <Dependent Role="Staff">
               <PropertyRef Name="Position" />
@@ -294,7 +294,7 @@
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <End Role="Services" Type="Self.Services" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="demo7Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="demoEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="Self.Clients" />
           <EntitySet Name="Orders" EntityType="Self.Orders" />
           <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" />
@@ -324,22 +324,22 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище demo7ModelContainer" CdmEntityContainer="demo7Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище demoModelContainer" CdmEntityContainer="demoEntities">
           <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="demo7Model.Clients">
+            <EntityTypeMapping TypeName="demoModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
                 <ScalarProperty Name="FIO" ColumnName="FIO" />
                 <ScalarProperty Name="ClientCode" ColumnName="ClientCode" />
                 <ScalarProperty Name="Passport" ColumnName="Passport" />
                 <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="demo7Model.Orders">
+            <EntityTypeMapping TypeName="demoModel.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
@@ -354,14 +354,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderStatuses">
-            <EntityTypeMapping TypeName="demo7Model.OrderStatuses">
+            <EntityTypeMapping TypeName="demoModel.OrderStatuses">
               <MappingFragment StoreEntitySet="OrderStatuses">
                 <ScalarProperty Name="StatusName" ColumnName="StatusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Services">
-            <EntityTypeMapping TypeName="demo7Model.Services">
+            <EntityTypeMapping TypeName="demoModel.Services">
               <MappingFragment StoreEntitySet="Services">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
@@ -371,7 +371,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Staff">
-            <EntityTypeMapping TypeName="demo7Model.Staff">
+            <EntityTypeMapping TypeName="demoModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
                 <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
                 <ScalarProperty Name="Position" ColumnName="Position" />
@@ -384,14 +384,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="StaffPositions">
-            <EntityTypeMapping TypeName="demo7Model.StaffPositions">
+            <EntityTypeMapping TypeName="demoModel.StaffPositions">
               <MappingFragment StoreEntitySet="StaffPositions">
-                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="demo7Model.sysdiagrams">
+            <EntityTypeMapping TypeName="demoModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -401,7 +401,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="OrderServices" TypeName="demo7Model.OrderServices" StoreEntitySet="OrderServices">
+          <AssociationSetMapping Name="OrderServices" TypeName="demoModel.OrderServices" StoreEntitySet="OrderServices">
             <EndProperty Name="Orders">
               <ScalarProperty Name="ID" ColumnName="OrderID" />
             </EndProperty>

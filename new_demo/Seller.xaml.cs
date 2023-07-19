@@ -27,14 +27,7 @@ namespace new_demo
             fName.Text = user.FIO.Split(' ')[1];
             lName.Text = user.FIO.Split(' ')[0];
             position.Text = user.Position;
-
-            Image image = new Image();
-            BitmapImage bitmap = new BitmapImage();
-            bitmap.BeginInit();
-            bitmap.UriSource = new Uri("D:/my/new_demo/new_demo/Resources/"+ user.FIO.Split(' ')[0] + ".jpeg", UriKind.Absolute);
-            bitmap.EndInit();
-            image.Stretch = Stretch.Fill;
-            photo.Source = bitmap;
+            photo.Source = new BitmapImage(new Uri("Resources/" + user.FIO.Split(' ')[0] + ".jpeg", UriKind.Relative)); 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

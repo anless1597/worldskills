@@ -200,7 +200,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Clients.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="CreateClient.xaml.cs">
       <DependentUpon>CreateClient.xaml</DependentUpon>
@@ -208,31 +208,41 @@
     <Compile Include="CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model1.cs">
+    <Compile Include="demoDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="demoDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>demoDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="demoDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>demoDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Orders.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="OrderStatuses.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Seller.xaml.cs">
       <DependentUpon>Seller.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Staff.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="StaffPositions.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>demoDB.tt</DependentUpon>
     </Compile>
     <Page Include="CreateClient.xaml">
       <SubType>Designer</SubType>
@@ -250,11 +260,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="demo7DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>demo7DataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -265,16 +270,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -292,23 +287,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="demo7DataSet.xsc">
-      <DependentUpon>demo7DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="demo7DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>demo7DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="demo7DataSet.xss">
-      <DependentUpon>demo7DataSet.xsd</DependentUpon>
-    </None>
-    <EntityDeploy Include="Model1.edmx">
+    <EntityDeploy Include="demoDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>demoDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="demoDB.edmx.diagram">
+      <DependentUpon>demoDB.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -320,16 +304,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Resource Include="Добавить.png" />
     <Resource Include="Resources\logo.png" />
     <Resource Include="Resources\Беляева.jpeg" />
@@ -347,7 +321,18 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="demoDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>demoDB.edmx</DependentUpon>
+      <LastGenOutput>demoDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="demoDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>demoDB.edmx</DependentUpon>
+      <LastGenOutput>demoDB.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.5.1.0\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.5.1.0\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

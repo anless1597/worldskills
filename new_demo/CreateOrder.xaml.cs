@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using new_demo.demo7DataSetTableAdapters;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +13,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static new_demo.demo7DataSet;
 
 namespace new_demo
 {
@@ -29,7 +27,7 @@ namespace new_demo
         {
             InitializeComponent();
             int lastOrder;
-            using (demo7Entities entities = new demo7Entities())
+            using (demoEntities entities = new demoEntities())
             {
                 clients = entities.Clients.ToList();
                 services = entities.Services.ToList();
@@ -86,7 +84,7 @@ namespace new_demo
                 order.Services = servStr;
                 order.Status = "Новая";
 
-                using (demo7Entities entities = new demo7Entities())
+                using (demoEntities entities = new demoEntities())
                 {
                     foreach (Services s in services)
                     {

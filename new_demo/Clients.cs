@@ -24,7 +24,7 @@ namespace new_demo
         public int ClientCode { get; set; }
         public string Passport { get; set; }
         public System.DateTime Birthday { get; set; }
-        public string Adress { get; set; }
+        public string Address { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     

@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
@@ -29,9 +30,26 @@ namespace new_demo
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool block = false;
         int loginCounter = 0;
         string captchaString = "";
         bool captchaEnabled = false;
+        DispatcherTimer blockLogin = new DispatcherTimer();
+        public MainWindow(bool block)
+        {
+            InitializeComponent();
+            captchaImage.Visibility = Visibility.Collapsed;
+            captchaText.Visibility = Visibility.Collapsed;
+            generateCaptchaButton.Visibility = Visibility.Collapsed;
+            this.block = block;
+            if (this.block) { 
+                loginButton.IsEnabled = false;
+                blockLogin.Interval = TimeSpan.FromSeconds(15);
+                blockLogin.IsEnabled = true;
+                blockLogin.Tick += BlockLogin;
+                blockLogin.Start();
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +57,7 @@ namespace new_demo
             captchaText.Visibility = Visibility.Collapsed;
             generateCaptchaButton.Visibility = Visibility.Collapsed;
         }
+
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
@@ -53,7 +72,6 @@ namespace new_demo
             passwordBox.Visibility = Visibility.Visible;
             passwordBox.Password = passwordBoxView.Text;
         }
-
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             string login = loginBox.Text;
@@ -65,7 +83,6 @@ namespace new_demo
             {
                 password = passwordBox.Password;
             }
-
 
             try
             {
@@ -107,13 +124,10 @@ namespace new_demo
                 MessageBox.Show("error");
             }
         }
-
         async Task EnableLogin(){
             await Task.Delay(10000);
             loginButton.IsEnabled = true;
         }
-
-
         private void ShowCaptcha()
         {
             Bitmap bitmap = GenerateCaptha();
@@ -152,18 +166,15 @@ namespace new_demo
                     float font_size = rnd.Next(50, 60);
                     using (Font the_font = new Font("Arial", font_size, System.Drawing.FontStyle.Bold))
                     {
-                        // Центрируем текст.
                         using (StringFormat string_format = new StringFormat())
                         {
                             string_format.Alignment = StringAlignment.Center;
                             string_format.LineAlignment = StringAlignment.Center;
                             RectangleF rectf = new RectangleF(i * ch_wid + 15, 10, ch_wid, ch_hei);
                             int X = i * ch_wid + 30;
-                            // Преобразование текста в путь.
                             using (GraphicsPath graphics_path = new GraphicsPath())
                             {
                                 graphics_path.AddString(captchaString[i].ToString(), the_font.FontFamily, (int)the_font.Style, the_font.Size, rectf, string_format);
-                                // Произвольные случайные параметры деформации.
                                 PointF[] pts =
                                 {
                                         new PointF(
@@ -182,7 +193,6 @@ namespace new_demo
                                 System.Drawing.Drawing2D.Matrix mat = new System.Drawing.Drawing2D.Matrix();
                                 graphics_path.Warp(pts, rectf, mat,WarpMode.Perspective, 0);
 
-                                // Поворачиваем бит случайным образом.
                                 float dx = (float)(X + ch_wid / 2);
                                 float dy = (float)(ch_hei / 2);
                                 gr.TranslateTransform(-dx, -dy, MatrixOrder.Append);
@@ -209,10 +219,15 @@ namespace new_demo
             }
             return captha;
         }
-
         private void generateCaptchaButton_Click(object sender, RoutedEventArgs e)
         {
             ShowCaptcha();
+        }
+        private void BlockLogin(object sender, EventArgs e)
+        {
+            loginButton.IsEnabled = true;
+            blockLogin.Stop();
+            blockLogin.Tick -= BlockLogin;
         }
     }
 }
